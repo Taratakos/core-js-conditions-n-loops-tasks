@@ -110,8 +110,35 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  if (num < 1 || num > 39) {
+    throw new Error('Number must be between 1 and 39');
+  }
+
+  let romanNumb = '';
+
+  const tens = Math.floor(num / 10);
+  for (let i = 0; i < tens; i += 1) {
+    romanNumb += 'X';
+  }
+
+  const ones = num % 10;
+  if (ones === 9) {
+    romanNumb += 'IX';
+  } else if (ones >= 5) {
+    romanNumb += 'V';
+    for (let i = 0; i < ones - 5; i += 1) {
+      romanNumb += 'I';
+    }
+  } else if (ones === 4) {
+    romanNumb += 'IV';
+  } else {
+    for (let i = 0; i < ones; i += 1) {
+      romanNumb += 'I';
+    }
+  }
+
+  return romanNumb;
 }
 
 /**
@@ -129,8 +156,58 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let resultStr = '';
+  let corespondWord = '';
+
+  for (let i = 0; i <= numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '0':
+        corespondWord = 'zero';
+        break;
+      case '1':
+        corespondWord = 'one';
+        break;
+      case '2':
+        corespondWord = 'two';
+        break;
+      case '3':
+        corespondWord = 'three';
+        break;
+      case '4':
+        corespondWord = 'four';
+        break;
+      case '5':
+        corespondWord = 'five';
+        break;
+      case '6':
+        corespondWord = 'six';
+        break;
+      case '7':
+        corespondWord = 'seven';
+        break;
+      case '8':
+        corespondWord = 'eight';
+        break;
+      case '9':
+        corespondWord = 'nine';
+        break;
+      case '-':
+        corespondWord = 'minus';
+        break;
+      case '.':
+        corespondWord = 'point';
+        break;
+      case ',':
+        corespondWord = 'point';
+        break;
+      default:
+        corespondWord = '';
+    }
+    resultStr += i < numberStr.length - 1 ? `${corespondWord} ` : corespondWord;
+  }
+
+  return resultStr;
 }
 
 /**
@@ -145,8 +222,14 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let reverseStr = '';
+
+  for (let i = str.length - 1; i >= 0; i -= 1) {
+    reverseStr += str[i];
+  }
+
+  return str === reverseStr;
 }
 
 /**
